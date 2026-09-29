@@ -2,7 +2,7 @@
 
 Extensão Chrome (Manifest V3) que edita qualquer elemento de qualquer site em linguagem natural, pelo botão direito.
 
-Feita pela [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor). Serve para testar ajuste de layout e de texto direto na página, antes de mexer no código. Se quiser algo parecido construído para a sua operação, [fale com a bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor).
+Desenvolvida pela [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor). Serve para testar ajuste de layout e de texto direto na página, antes de mexer no código. Se quiser algo parecido construído para a sua operação, [fale com a bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor).
 
 ## O que faz
 
