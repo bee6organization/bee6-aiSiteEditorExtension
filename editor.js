@@ -47,7 +47,7 @@ const client = createPortClient({
   onStateChanged: (state) => {
     view.setConnection("ok");
     view.setState(state);
-    if (state && state.title) document.title = `Editor IA — ${state.title}`;
+    if (state && state.title) document.title = `AI Site Modder — ${state.title}`;
   },
 });
 

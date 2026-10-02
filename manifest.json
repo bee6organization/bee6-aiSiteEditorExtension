@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "aiSiteEditor by bee6: editor de sites com IA",
-  "short_name": "aiSiteEditor",
+  "name": "AI Site Modder by bee6: editor de sites com IA",
+  "short_name": "AI Site Modder",
   "version": "0.6.0",
-  "homepage_url": "https://www.bee6.com.br/?utm_source=aisiteeditor&utm_medium=extensao&utm_campaign=aisiteeditor",
+  "homepage_url": "https://www.bee6.com.br/?utm_source=aisitemodder&utm_medium=extensao&utm_campaign=aisitemodder",
   "description": "Edite qualquer elemento de qualquer site em linguagem natural, pelo botão direito. Log no Console, sidebar no Elements, presets por site.",
   "permissions": ["contextMenus", "storage", "activeTab", "tabs", "scripting", "clipboardWrite"],
   "host_permissions": ["<all_urls>"],
@@ -12,6 +12,6 @@
   "web_accessible_resources": [{ "resources": ["lib/*", "fonts/*.woff2"], "matches": ["<all_urls>"] }],
   "devtools_page": "devtools.html",
   "options_ui": { "page": "options.html", "open_in_tab": true },
-  "action": { "default_title": "aiSiteEditor", "default_popup": "popup.html", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" } },
+  "action": { "default_title": "AI Site Modder", "default_popup": "popup.html", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" } },
   "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
 }

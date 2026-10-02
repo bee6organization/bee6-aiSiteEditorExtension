@@ -7,7 +7,7 @@
 //
 // Diferenças em relação à extensão original, todas por segurança:
 // - UI inteira dentro de shadow DOM fechado (<aise-mod>): a página não lê nem
-//   altera o painel, e o editor de IA do aiSiteEditor ignora esses nós.
+//   altera o painel, e o editor de IA do AI Site Modder ignora esses nós.
 // - Nenhum innerHTML: texto de API (nome de feed, de comunidade) entra só como
 //   textContent; os ícones SVG são montados com createElementNS.
 // - Ícone de comunidade só carrega de host do próprio Reddit, via https.

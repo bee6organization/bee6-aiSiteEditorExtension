@@ -1,7 +1,7 @@
 /* brand.css — identidade bee6 compartilhada pelas páginas da extensão
    (popup, Opções, janela separada, sidebar do DevTools): tokens de cor
    escuros (Liquid Glass), fontes locais, cabeçalho com o símbolo e a
-   assinatura "desenvolvido pela bee6". Cada página carrega fonts/fonts.css, este
+   assinatura "developed and modded by bee6". Cada página carrega fonts/fonts.css, este
    arquivo e depois o seu CSS próprio. O painel dentro da página usa as
    mesmas cores em lib/ui/styles.js. */
 
@@ -75,7 +75,7 @@ body {
   color: var(--aise-accent);
 }
 
-/* Assinatura "desenvolvido pela bee6" — link para o site. */
+/* Assinatura "developed and modded by bee6" — link para o site. */
 .aise-bee6 {
   display: inline-flex;
   align-items: center;

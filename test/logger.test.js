@@ -34,7 +34,7 @@ test("request loga grupo com alvos, provedor e mudanças", () => {
     summary: "ok",
   });
   const text = c.calls.map((x) => x[1]).join("\n");
-  assert.match(text, /\[Editor IA\] Pedido #3 — "vermelho"/);
+  assert.match(text, /\[AI Site Modder] Pedido #3 — "vermelho"/);
   assert.match(text, /s1 = button.x/);
   assert.match(text, /claude · claude-opus-5 · 2,1 s$/m);
   assert.match(text, /✔ setStyle button.x color: "" → "red"/);
@@ -71,21 +71,21 @@ test("error loga mensagem de erro", () => {
   const c = spyConsole();
   createLogger(c).error({ n: 5, request: "teste", message: "conexão falhou" });
   assert.equal(c.calls[0][0], "error");
-  assert.match(c.calls[0][1], /\[Editor IA\] Pedido #5 — "teste" falhou: conexão falhou/);
+  assert.match(c.calls[0][1], /\[AI Site Modder] Pedido #5 — "teste" falhou: conexão falhou/);
 });
 
 test("undo loga desfeito", () => {
   const c = spyConsole();
   createLogger(c).undo({ n: 2, request: "azul" });
   assert.equal(c.calls[0][0], "log");
-  assert.match(c.calls[0][1], /\[Editor IA\] Desfeito o pedido #2 — "azul"/);
+  assert.match(c.calls[0][1], /\[AI Site Modder] Desfeito o pedido #2 — "azul"/);
 });
 
 test("preset loga aplicação", () => {
   const c = spyConsole();
   createLogger(c).preset({ name: "tema-escuro", applied: 5, total: 6, missing: [".nao-existe"] });
   assert.equal(c.calls[0][0], "log");
-  assert.match(c.calls[0][1], /\[Editor IA\] Preset "tema-escuro" aplicado: 5\/6 operações/);
+  assert.match(c.calls[0][1], /\[AI Site Modder] Preset "tema-escuro" aplicado: 5\/6 operações/);
   assert.equal(c.calls[1][0], "warn");
   assert.match(c.calls[1][1], /\.nao-existe/);
 });

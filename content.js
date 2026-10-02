@@ -624,7 +624,7 @@ function showToast(msg) {
   const p = ensurePanel();
   if (!p.isOpen()) p.show();
   p.toast(msg);
-  console.info(`[aiSiteEditor] ${msg}`);
+  console.info(`[AI Site Modder] ${msg}`);
 }
 
 async function savePresetFlow(providedName) {
@@ -646,7 +646,7 @@ async function savePresetFlow(providedName) {
 function checkedPresetOps(preset) {
   const { ops, errors } = libs.ops.validateOps(preset.ops);
   if (errors.length > 0) {
-    console.warn(`[Editor IA] preset "${preset.name}" tem ${errors.length} operação(ões) inválida(s), ignorada(s): ${errors.join("; ")}`);
+    console.warn(`[AI Site Modder] preset "${preset.name}" tem ${errors.length} operação(ões) inválida(s), ignorada(s): ${errors.join("; ")}`);
   }
   return ops;
 }
@@ -701,8 +701,8 @@ let panelFactory = null;
   try {
     await init();
   } catch (err) {
-    initError = `Não foi possível iniciar o Editor IA nesta página: ${err && err.message ? err.message : String(err)}`;
-    console.error("[Editor IA] falha na inicialização:", err);
+    initError = `Não foi possível iniciar o AI Site Modder nesta página: ${err && err.message ? err.message : String(err)}`;
+    console.error("[AI Site Modder] falha na inicialização:", err);
   } finally {
     // `ready` SEMPRE resolve: quem espera por ela (handleMessage) precisa
     // seguir e responder o erro, não ficar pendurado.
@@ -725,7 +725,7 @@ async function init() {
     redoRecords: libs.ops.redoRecords,
     stabilizeOps: libs.storage.stabilizeOps,
     sanitize,
-    warn: (msg) => console.warn(`[Editor IA] ${msg}`),
+    warn: (msg) => console.warn(`[AI Site Modder] ${msg}`),
   });
 
   settings = await libs.storage.getSettings(chrome.storage.local);

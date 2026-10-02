@@ -1,4 +1,4 @@
-# Mods nativos no aiSiteEditor
+# Mods nativos no AI Site Modder
 
 Data: 2026-10-08 · Autor: Arthur Attili (com Claude) · Status: fase 1 implementada
 

@@ -1,5 +1,5 @@
 // sidebar.js — página carregada por `sidebar.html` dentro da sidebar
-// "Editor IA" (aba Elements do DevTools). Único responsável por falar com o
+// "AI Site Modder" (aba Elements do DevTools). Único responsável por falar com o
 // `chrome.devtools.*` e por rodar os `eval` no contexto da página
 // inspecionada; a conversa com a porta `aise-devtools` do background mora em
 // lib/port-client.js e a renderização em lib/ui/sidebar-view.js (módulos

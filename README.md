@@ -1,8 +1,8 @@
-# aiSiteEditor
+# AI Site Modder
 
 Extensão Chrome (Manifest V3) que edita qualquer elemento de qualquer site em linguagem natural, pelo botão direito.
 
-Desenvolvida pela [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor). Serve para testar ajuste de layout e de texto direto na página, antes de mexer no código. Se quiser algo parecido construído para a sua operação, [fale com a bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor).
+Feita pela [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisitemodder). Serve para testar ajuste de layout e de texto direto na página, antes de mexer no código. Se quiser algo parecido construído para a sua operação, [fale com a bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisitemodder).
 
 ## O que faz
 
@@ -48,8 +48,8 @@ Clique em "Salvar" para gravar.
 4. Escreva o pedido na caixa de texto (ex.: "deixe o botão vermelho e maior") e clique em **Aplicar** (ou Ctrl/Cmd+Enter).
    - O elemento selecionado é a **referência** do pedido, não um limite: a IA recebe também um esboço da estrutura da página (uma linha por elemento, com ids, classes e o texto de cada um, marcando os selecionados) e pode alterar só aquele elemento, os irmãos dele, a seção inteira ou a página toda, conforme o que você pedir. "Deixe este botão vermelho" muda só o botão; "deixe todos os botões como este" ou "todos os títulos da página em azul" mudam todos de uma vez, de preferência com uma única regra de CSS em vez de elemento por elemento.
 5. O histórico de pedidos aparece no painel, cada um com um botão **Desfazer**. Os botões **Desfazer tudo** e **Refazer tudo** agem sobre todo o histórico da sessão.
-6. Todo pedido gera um grupo recolhido no Console do DevTools, com o prefixo `[Editor IA] Pedido #N — "texto do pedido"`, mostrando as operações pedidas e as alterações de fato aplicadas (ou o aviso, se alguma operação não encontrou o alvo).
-7. Na aba **Elements** do DevTools existe uma sub-aba **"Editor IA"**: mostra o elemento atualmente inspecionado, tem um botão **"Usar elemento selecionado"** (usa o `$0` do DevTools como alvo) e espelha o mesmo histórico de pedidos da página, com os mesmos botões de desfazer.
+6. Todo pedido gera um grupo recolhido no Console do DevTools, com o prefixo `[AI Site Modder] Pedido #N — "texto do pedido"`, mostrando as operações pedidas e as alterações de fato aplicadas (ou o aviso, se alguma operação não encontrou o alvo).
+7. Na aba **Elements** do DevTools existe uma sub-aba **"AI Site Modder"**: mostra o elemento atualmente inspecionado, tem um botão **"Usar elemento selecionado"** (usa o `$0` do DevTools como alvo) e espelha o mesmo histórico de pedidos da página, com os mesmos botões de desfazer.
 8. Ao final da revisão, clique em **Copiar log** (no rodapé do painel, da janela separada ou da sidebar do DevTools). A extensão copia um relatório em Markdown com tudo o que foi pedido nesta sessão, pronto para colar no Claude Code (ou outra IA) que trabalha no código-fonte/homolog do site. O relatório traz, para cada pedido: o seu texto original, como a IA resolveu, o elemento alvo (seletor estável, caminho de ancestrais e o HTML antes e depois) e cada operação aplicada no DOM, com os valores antigos e novos. Pedidos desfeitos ficam de fora; presets já aplicados na página entram numa seção própria. É o fluxo pensado para reunião com cliente: os ajustes são feitos na hora, ao vivo na página, e depois viram uma única solicitação de código com um copiar e colar.
 
 ## Presets e o aviso de site modificado
@@ -117,8 +117,8 @@ Sem build step: JS puro (ES modules), Node 24, testes com `node --test` e `jsdom
 - [ ] Fechar a janela separada pelo X do sistema: a seleção some da página (mesmo efeito do × do painel)
 - [ ] Abrir as Opções no modo escuro do Chrome: só a seção do provedor escolhido aparece e os dropdowns ficam legíveis
 - [ ] Desfazer um dos pedidos pelo painel
-- [ ] Conferir o grupo do pedido no Console (`[Editor IA] Pedido #N — "..."`)
-- [ ] Abrir o DevTools → aba Elements → sidebar "Editor IA", selecionar um nó na árvore, usar "Usar elemento selecionado" e enviar um pedido por ali
+- [ ] Conferir o grupo do pedido no Console (`[AI Site Modder] Pedido #N — "..."`)
+- [ ] Abrir o DevTools → aba Elements → sidebar "AI Site Modder", selecionar um nó na árvore, usar "Usar elemento selecionado" e enviar um pedido por ali
 - [ ] Salvar um preset a partir do painel ou da sidebar
 - [ ] Abrir o popup da extensão e ligar "Auto-aplicar" para esse preset
 - [ ] Recarregar a página e conferir: banner aparece, badge da toolbar mostra "MOD", Console mostra o aviso de site modificado
@@ -154,4 +154,4 @@ O nome e o logo da bee6 são marcas da bee6 e não entram na licença MIT.
 
 ---
 
-Um projeto [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisiteeditor).
+Um projeto [bee6](https://www.bee6.com.br/?utm_source=github&utm_medium=readme&utm_campaign=aisitemodder).
