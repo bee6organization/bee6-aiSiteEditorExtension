@@ -6,6 +6,7 @@
 // Import estático — service worker de módulo suporta `import` no topo do arquivo.
 import { getSettings } from "./lib/storage.js";
 import { callProvider, testProvider, listModels } from "./lib/ai-call.js";
+import { NATIVE_MODS, findMod, getEnabledMods, setModEnabled, syncRegisteredMods, urlMatches } from "./lib/mods.js";
 
 const CONTEXT_MENU_ID = "aise-edit";
 const WARN_BADGE_MS = 3000;
@@ -201,7 +202,64 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.removeAll(() => {
     chrome.contextMenus.create({ id: CONTEXT_MENU_ID, title: "Editar com IA", contexts: ["all"] });
   });
+  syncMods();
 });
+
+// ---------------------------------------------------------------------------
+// Mods nativos (lib/mods.js)
+// ---------------------------------------------------------------------------
+
+async function syncMods() {
+  try {
+    await syncRegisteredMods(chrome.scripting, await getEnabledMods(chrome.storage.local));
+  } catch (err) {
+    console.warn("[aiSiteEditor] falha ao sincronizar mods:", err);
+  }
+}
+
+chrome.runtime.onStartup.addListener(syncMods);
+
+// Ligar/desligar mod é decisão do usuário: só aceita de página da própria
+// extensão (popup/opções), nunca de content script — um content script roda
+// dentro de sites e não pode ativar código com acesso à sessão de outro site.
+function isExtensionPage(sender) {
+  return !sender.tab && typeof sender.url === "string" && sender.url.startsWith(chrome.runtime.getURL(""));
+}
+
+async function handleSetModEnabled(message, sender) {
+  if (!isExtensionPage(sender)) return { ok: false, error: "não autorizado" };
+  const mod = findMod(message.id);
+  if (!mod) return { ok: false, error: "mod desconhecido" };
+  const enabled = await setModEnabled(chrome.storage.local, mod.id, !!message.enabled);
+  try {
+    await syncRegisteredMods(chrome.scripting, enabled);
+  } catch (err) {
+    // Registro falhou: o storage não pode ficar dizendo "ligado" sem script
+    // registrado (o popup mostraria ligado e abas novas não receberiam o mod).
+    await setModEnabled(chrome.storage.local, mod.id, !message.enabled).catch(() => {});
+    throw err;
+  }
+  // Abas já abertas não recebem script registrado agora; injeta nelas. O
+  // script tem guarda contra carga dupla e confere o storage antes de agir.
+  // Ao desligar não precisa: o mod escuta o storage e se desmonta sozinho.
+  if (message.enabled) {
+    const tabs = await chrome.tabs.query({});
+    for (const tab of tabs) {
+      if (tab.id == null || !urlMatches(mod, tab.url)) continue;
+      chrome.scripting.executeScript({ target: { tabId: tab.id }, files: mod.js }).catch(() => {});
+    }
+  }
+  return { ok: true, enabled };
+}
+
+async function handleListMods(sender) {
+  if (!isExtensionPage(sender)) return { ok: false, error: "não autorizado" };
+  const enabled = await getEnabledMods(chrome.storage.local);
+  return {
+    ok: true,
+    mods: NATIVE_MODS.map((m) => ({ id: m.id, name: m.name, description: m.description, access: m.access, enabled: !!enabled[m.id] })),
+  };
+}
 
 // chrome:// , edge:// , about: e a Chrome Web Store nunca aceitam
 // `chrome.scripting.executeScript` — tentar só gera erro sem chance de sucesso.
@@ -285,6 +343,10 @@ async function routeMessage(message, sender) {
       }
       return { ok: true };
     }
+    case "LIST_MODS":
+      return handleListMods(sender);
+    case "SET_MOD_ENABLED":
+      return handleSetModEnabled(message, sender);
     case "OPEN_OPTIONS":
       chrome.runtime.openOptionsPage();
       return { ok: true };

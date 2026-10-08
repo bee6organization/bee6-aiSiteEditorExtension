@@ -67,7 +67,7 @@ document.addEventListener(
 );
 
 function isAiseHostTarget(target) {
-  return typeof target.closest === "function" && !!target.closest("aise-panel, aise-indicator, aise-picker");
+  return typeof target.closest === "function" && !!target.closest("aise-panel, aise-indicator, aise-picker, aise-mod");
 }
 
 // Mensagens do background/DevTools/popup: o listener é registrado já, antes

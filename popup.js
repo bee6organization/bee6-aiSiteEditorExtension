@@ -9,6 +9,7 @@ import { createPopupView } from "./lib/ui/popup-view.js";
 import { mountBrand } from "./lib/ui/brand.js";
 import { buildPresetReport } from "./lib/report.js";
 import { copyText } from "./lib/ui/clipboard.js";
+import { createModsView } from "./lib/ui/mods-view.js";
 
 const UNEDITABLE_TEXT = "Esta página não pode ser editada";
 
@@ -236,3 +237,31 @@ async function init() {
 init().catch((err) => {
   view.setError((err && err.message) || String(err));
 });
+
+// ---------------------------------------------------------------------------
+// Mods nativos — independem da aba atual, então ficam fora do `init`.
+// ---------------------------------------------------------------------------
+
+const modsView = createModsView(document, document.getElementById("mods"), { onToggle: onToggleMod });
+
+async function refreshMods() {
+  const res = await chrome.runtime.sendMessage({ type: "LIST_MODS" });
+  if (!res || !res.ok) throw new Error((res && res.error) || "não foi possível listar os mods");
+  modsView.setMods(res.mods);
+}
+
+async function onToggleMod(id, enabled) {
+  modsView.setError("");
+  modsView.setBusy(id);
+  try {
+    const res = await chrome.runtime.sendMessage({ type: "SET_MOD_ENABLED", id, enabled });
+    if (!res || !res.ok) throw new Error((res && res.error) || "falha ao alterar o mod");
+  } catch (err) {
+    modsView.setError((err && err.message) || String(err));
+  } finally {
+    modsView.setBusy(null);
+    await refreshMods().catch((err) => modsView.setError(err.message));
+  }
+}
+
+refreshMods().catch((err) => modsView.setError(err.message));

@@ -231,3 +231,52 @@ select option {
   .aise-btn, .aise-popup-preset, .aise-popup-link { transition: none; }
   .aise-btn:hover:not(:disabled), .aise-btn:active:not(:disabled) { transform: none; }
 }
+
+/* Mods nativos — fica abaixo do #root, vale para qualquer aba. */
+#mods {
+  padding: 0 12px 12px;
+}
+
+.aise-mods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--aise-border);
+}
+
+.aise-mods-title {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aise-fg-muted);
+}
+
+.aise-mod {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.aise-mod input {
+  margin-top: 2px;
+  accent-color: var(--aise-accent);
+}
+
+.aise-mod-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aise-mod-name {
+  font-weight: 700;
+}
+
+.aise-mod-desc,
+.aise-mod-access {
+  font-size: 12px;
+  color: var(--aise-fg-muted);
+}
